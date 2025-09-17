@@ -14,7 +14,7 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 if not DEBUG:
-    ALLOWED_HOSTS += ['your-backend-url.com']  # Replace with production domain
+    ALLOWED_HOSTS += ['trainee-tracker-miniproject.onrender.com']  # Replace with production domain
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -42,9 +42,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',  # Match frontend dev port
-    'http://localhost:3001',
-    'https://your-frontend-url.com',  # Replace with production frontend URL
+    'https://trainee-tracker-miniproject.vercel.app/login'
 ]
 
 REST_FRAMEWORK = {
