@@ -11,21 +11,27 @@ class ProjectViewSet(viewsets.ModelViewSet):
     serializer_class = ProjectSerializer
     permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
-        user = self.request.user
-        queryset = Project.objects.all()
-        
-        if not user.is_staff:
-            queryset = queryset.filter(assigned_to=user)
-        
-        status = self.request.query_params.get('status')
-        priority = self.request.query_params.get('priority')
-        if status:
-            queryset = queryset.filter(status=status)
-        if priority:
-            queryset = queryset.filter(priority=priority)
-            
-        return queryset
+  def get_queryset(self):
+    user = self.request.user
+    
+    if not user.is_authenticated:
+        # Proper REST response for unauthenticated access
+        raise NotAuthenticated("Authentication credentials were not provided.")
+    
+    queryset = Project.objects.all()
+
+    if not user.is_staff:
+        queryset = queryset.filter(assigned_to=user)
+
+    status = self.request.query_params.get('status')
+    priority = self.request.query_params.get('priority')
+    if status:
+        queryset = queryset.filter(status=status)
+    if priority:
+        queryset = queryset.filter(priority=priority)
+
+    return queryset
+
 
     @action(detail=False, methods=['get'])
     def reports(self, request):
