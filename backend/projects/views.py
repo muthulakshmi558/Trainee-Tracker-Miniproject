@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .models import Project
 from .serializers import ProjectSerializer
 from rest_framework.decorators import action
@@ -10,7 +10,7 @@ from rest_framework.exceptions import NotAuthenticated
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
   def get_queryset(self):
     user = self.request.user
