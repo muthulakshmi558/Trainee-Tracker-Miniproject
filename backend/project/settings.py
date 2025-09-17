@@ -42,7 +42,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://trainee-tracker-miniproject.vercel.app/login'
+    'https://trainee-tracker-miniproject.vercel.app'
 ]
 
 REST_FRAMEWORK = {
